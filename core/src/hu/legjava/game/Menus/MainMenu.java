@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import hu.legjava.game.GameScreen;
 import hu.legjava.game.Main;
 
 public class MainMenu implements Screen {
@@ -38,7 +39,8 @@ public class MainMenu implements Screen {
 
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    main.setScreen(new LoadingScreen());
+                    Main.state = Main.STATES.SINGLEPLAYER;
+                    main.setScreen(new LoadingScreen(main));
                     dispose();
                     super.clicked(event, x, y);
                 }
