@@ -13,11 +13,10 @@ import hu.legjava.game.Net.Events;
 import hu.legjava.game.VDat;
 
 import static hu.legjava.game.Main.PPM;
-
 public class Player  extends VDat {
     private OrthographicCamera cam;
     private Body body;
-    private float speed = 3f;
+    private float speed = 1.1f;
     private Sprite text;
 
     public Player(World world, boolean local, OrthographicCamera cam)

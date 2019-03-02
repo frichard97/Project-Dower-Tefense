@@ -4,14 +4,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
+import hu.legjava.game.Types.AType;
+import hu.legjava.game.Types.Attack;
+import hu.legjava.game.Types.AttackFactory;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.VDat;
+
+import java.util.ArrayList;
 
 import static hu.legjava.game.Main.PPM;
 /**************************
  * MAX LEVEL 5
  *
  * ***********************************/
+/***********************GRAFIKA****************************/
 public class AttackTower extends VDat {
     private Sprite alap;
     private Sprite kristaly;
@@ -25,6 +31,8 @@ public class AttackTower extends VDat {
             { -33,-32},
             {-32,33}
     };
+     /*************************Végleges*************************/
+     private Attack attack;
     public AttackTower(World world,boolean local)
     {
         x = 200;
@@ -39,6 +47,8 @@ public class AttackTower extends VDat {
         kristaly.setOriginCenter();
         levelkristaly = new Sprite(new Texture("levelkristaly.png"));
         levelkristaly.setBounds(0,0,levelkristaly.getWidth()/PPM,levelkristaly.getHeight()/PPM);
+        attack = AttackFactory.getAttackType(AType.Basic);
+        attack.setBase(x,y);
     }
     @Override
     protected void update(float s) {
@@ -60,6 +70,24 @@ public class AttackTower extends VDat {
                 levelkristaly.draw(batch);
         }
 
+    }
+    public boolean attack(Enemy focus,ArrayList<Enemy> enemies, SpriteBatch batch){
+
+        attack.update(focus.getX(),focus.getY());
+        attack.draw(batch);
+        if(attack.isAttack_end()) {
+            for(Enemy enemy : enemies)
+            {
+                //TODO SPECIAL WITH AOE
+                //TODO SPAWN HERE
+            }
+        }
+        return false;
+
+    }
+    private float tavolsag(float enemyx,float enemyy)
+    {
+        return (float)Math.sqrt(Math.pow(enemyx-x,2)+Math.pow(enemyy-y,2));
     }
 
     @Override

@@ -91,5 +91,4 @@ public class Controller {
             maprenderer.setView(cam);
             maprenderer.render();
         }
-        //TODO JÁTÉKMENET
 }
