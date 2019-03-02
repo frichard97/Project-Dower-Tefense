@@ -2,6 +2,7 @@ package hu.legjava.game.Menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -44,13 +45,26 @@ public class MainMenu implements Screen {
                     dispose();
                     super.clicked(event, x, y);
                 }
+
             });
+            multiPlayer.addListener(new ClickListener(){
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Main.state = Main.STATES.SINGLEPLAYER;
+                main.setScreen(new MultiMenu(main));
+                dispose();
+                super.clicked(event, x, y);
+            }
+        });
 
     }
 
     @Override
     public void render(float delta) {
         stage.act(delta);
+        Gdx.gl.glClearColor(0, 0, 0, 0);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
     }
 
