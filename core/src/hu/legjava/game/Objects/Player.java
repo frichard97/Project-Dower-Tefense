@@ -3,6 +3,8 @@ package hu.legjava.game.Objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -15,12 +17,14 @@ import static hu.legjava.game.Main.PPM;
 public class Player  extends VDat {
     private OrthographicCamera cam;
     private Body body;
-    private float speed = 4f;
+    private float speed = 3f;
+    private Sprite text;
 
     public Player(World world, boolean local, OrthographicCamera cam)
     {
-        x = 10;
-        y = 10;
+        /*******************ENGINE***************************/
+        y= 20000;
+        x = 20000;
         this.local = local;
         this.cam = cam;
         BodyDef bdef = new BodyDef();
@@ -29,9 +33,13 @@ public class Player  extends VDat {
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.position.set(x/PPM,y/PPM);
         body = world.createBody(bdef);
-        shape.setAsBox(100/PPM,100/PPM);
+        shape.setAsBox(25/PPM,25/PPM);
         fdef.shape = shape;
         body.createFixture(fdef);
+        /**********************GRAFIKA*************************/
+        text = new Sprite(new Texture("magus2.png"));
+        text.setBounds(x,y,text.getWidth()/PPM,text.getHeight()/PPM);
+        text.setOriginCenter();
     }
     @Override
     protected void update(float s) {
@@ -74,14 +82,16 @@ public class Player  extends VDat {
         if(angle < 0){
             angle += 360;
         }
+        body.setTransform(pos.x, pos.y, (float) Math.toRadians(angle));
+        text.setPosition(x-text.getWidth()/2,y-text.getHeight()/2);
+        text.setRotation((float)angle);
         cam.position.x =x;
         cam.position.y = y;
-        body.setTransform(pos.x, pos.y, (float) Math.toRadians(angle));
     }
 
     @Override
     protected void draw(SpriteBatch batch) {
-
+        text.draw(batch);
     }
 
     @Override
