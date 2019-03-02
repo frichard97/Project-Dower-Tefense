@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import hu.legjava.game.Menus.StartingScreen;
 
 public class Main extends Game {
+	public static final float PPM = 100f;
+	public static final float GAMEWIDTH = 1920;
+	public static final float GAMEHEIGHT = 1080;
 	static public AssetManager manager;
 	public enum STATES{
 		SINGLEPLAYER,

@@ -1,6 +1,8 @@
 package hu.legjava.game.Menus;
 import com.badlogic.gdx.Screen;
 import hu.legjava.game.Controller;
+import hu.legjava.game.GameScreen;
+import hu.legjava.game.Main;
 import hu.legjava.game.Net.Net;
 
 public class LoadingScreen implements Screen {
@@ -10,16 +12,20 @@ public class LoadingScreen implements Screen {
     public Net getNet() {
         return net;
     }
-    public LoadingScreen() {
+    private Main main;
+    public LoadingScreen(Main main) {
         controller = new Controller();
+        this.main = main;
     }
-    public LoadingScreen(Net net) {
+    public LoadingScreen(Main main,Net net) {
         controller = new Controller(net);
+        this.main = main;
     }
 
     @Override
     public void show() {
         //TODO ESETLEGES JÁTÉK ELőKÉSZÜLETI MÜVELETEKNEK EGY LOADER
+        main.setScreen(new GameScreen(main,controller));
     }
 
     @Override
