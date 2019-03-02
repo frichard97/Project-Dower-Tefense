@@ -1,11 +1,8 @@
 package hu.legjava.game.Net;
 
-import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import hu.legjava.game.VDat;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Client extends Net implements Runnable
@@ -31,7 +28,6 @@ public class Client extends Net implements Runnable
             public void received(Connection connection, Object object) {
                 super.received(connection, object);
             }
-
             @Override
             public void idle(Connection connection) {
                 super.idle(connection);

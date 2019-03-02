@@ -7,6 +7,8 @@ import hu.legjava.game.Net.Net;
 import java.util.ArrayList;
 import java.util.List;
 
+import static hu.legjava.game.Main.STATES.*;
+
 public class Controller {
     private List<VDat> dat = new ArrayList<VDat>();
     Net net;
@@ -31,6 +33,18 @@ public class Controller {
     public void Send(Events event){net.Send(event);}
     public List<VDat> getSprites(){return dat;}
     public void update(float delta){
+        for(VDat dat: dat)
+        {
+            if(Main.state == SINGLEPLAYER)
+            {
+                dat.update(delta);
+            }
+            if(Main.state == CLIENT)
+            {
+                if(dat.local)net.Send(dat.pull());
+
+            }
+        }
         //TODO JÁTÉKMENET
     }
 }

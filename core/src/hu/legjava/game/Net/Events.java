@@ -13,4 +13,10 @@ public class Events {
     public static class OBJECTDMG extends Events {public int wallid;public float wallhp;}
     public static class Robbanas extends Events {public short id;}
     public static class Defeat extends Events {public int hit;}
+    public static class Datas extends Events {public float x;
+        public float y;
+        public int id;
+        public int spriteid;
+        public  float hp;
+        public boolean local;}
 }

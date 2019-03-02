@@ -27,7 +27,6 @@ public class GameScreen implements Screen {
         controller.update(delta);
         for(VDat dat : controller.getSprites())
             {
-            if(dat.local)dat.update(delta);
             dat.draw(batch);
             }
         }
