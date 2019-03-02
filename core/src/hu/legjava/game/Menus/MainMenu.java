@@ -2,10 +2,12 @@ package hu.legjava.game.Menus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import hu.legjava.game.Main;
 
 public class MainMenu implements Screen {
@@ -32,6 +34,15 @@ public class MainMenu implements Screen {
             table.add(exit).size(200,90).spaceBottom(5f).row();
             stage.addActor(table);
             Gdx.input.setInputProcessor(stage);
+            singlePlayer.addListener(new ClickListener(){
+
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    main.setScreen(new LoadingScreen());
+                    dispose();
+                    super.clicked(event, x, y);
+                }
+            });
 
     }
 
@@ -63,6 +74,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
+        stage.dispose();
 
     }
 }

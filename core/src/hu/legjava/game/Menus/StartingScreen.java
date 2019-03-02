@@ -17,6 +17,7 @@ public class StartingScreen implements Screen {
     public void render(float delta) {
         if(Main.manager.isFinished())
         {
+            //TODO ASSETS LOAD
             main.setScreen(new MainMenu(main));
         }
     }

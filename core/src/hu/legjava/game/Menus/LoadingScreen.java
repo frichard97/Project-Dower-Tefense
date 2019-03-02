@@ -19,7 +19,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void show() {
-        //TODO ESETLEGES JÁTÉK ELPKÉSZÜLETI MÜVELETEKNEK EGY LOADER
+        //TODO ESETLEGES JÁTÉK ELőKÉSZÜLETI MÜVELETEKNEK EGY LOADER
     }
 
     @Override
@@ -28,7 +28,6 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
