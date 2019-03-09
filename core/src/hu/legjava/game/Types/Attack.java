@@ -7,7 +7,7 @@ import hu.legjava.game.Objects.Enemy;
 
 import java.util.Date;
 
-public abstract class Attack {
+public  class Attack {
 
     protected Sprite sprite;
     private float dmg = 0;
@@ -15,10 +15,11 @@ public abstract class Attack {
     private float x, y;
     private float aoe;
     private Special special;
-    public Attack(Sprite sprite, float aoe, float dmg) {
+    public Attack(Sprite sprite, float aoe, float dmg,Special special) {
         this.sprite = sprite;
         this.dmg = dmg;
         this.aoe = aoe;
+        this.special = special;
     }
 
     public boolean isAttack_end() {
@@ -30,11 +31,22 @@ public abstract class Attack {
         this.x = x;
         this.y = y;
     }
-    public Special getSpecial()
+    public float getSpecial(Special.SpecialTypes type)
     {
-        return special;
+        return special.getSpecial(type);
     }
-    public abstract void draw(SpriteBatch batch);
+
+    public float getAoe() {
+        return aoe;
+    }
+    public float getDmg()
+    {
+        return dmg;
+    }
+
+    public void draw(SpriteBatch batch){
+        sprite.draw(batch);
+    }
     public void update(float ex,float ey){
             double tavolsagx = ex - x;
             double tavolsagy = ey - y;

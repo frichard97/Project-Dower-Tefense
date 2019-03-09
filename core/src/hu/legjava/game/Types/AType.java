@@ -5,5 +5,5 @@ public enum AType {
     FIRE,
     EARTH,
     WIND,
-    Basic,
+    BASIC,
 }

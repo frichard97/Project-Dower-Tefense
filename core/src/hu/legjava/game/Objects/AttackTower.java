@@ -8,17 +8,19 @@ import hu.legjava.game.Types.AType;
 import hu.legjava.game.Types.Attack;
 import hu.legjava.game.Types.AttackFactory;
 import hu.legjava.game.Net.Events;
+import hu.legjava.game.Types.ObjectTypes;
 import hu.legjava.game.VDat;
 
 import java.util.ArrayList;
 
 import static hu.legjava.game.Main.PPM;
+import static hu.legjava.game.Types.Special.SpecialTypes.SPAWN;
 /**************************
  * MAX LEVEL 5
  *
  * ***********************************/
 /***********************GRAFIKA****************************/
-public class AttackTower extends VDat {
+public class AttackTower extends Tower {
     private Sprite alap;
     private Sprite kristaly;
     private Sprite levelkristaly;
@@ -33,8 +35,9 @@ public class AttackTower extends VDat {
     };
      /*************************Végleges*************************/
      private Attack attack;
-    public AttackTower(World world,boolean local)
+    public AttackTower(World world, boolean local)
     {
+        super(ObjectTypes.ATTACKTOWER);
         x = 200;
         y = 200;
         this.local = local;
@@ -47,7 +50,7 @@ public class AttackTower extends VDat {
         kristaly.setOriginCenter();
         levelkristaly = new Sprite(new Texture("levelkristaly.png"));
         levelkristaly.setBounds(0,0,levelkristaly.getWidth()/PPM,levelkristaly.getHeight()/PPM);
-        attack = AttackFactory.getAttackType(AType.Basic);
+        attack = AttackFactory.getAttackType(AType.BASIC);
         attack.setBase(x,y);
     }
     @Override
@@ -71,23 +74,26 @@ public class AttackTower extends VDat {
         }
 
     }
-    public boolean attack(Enemy focus,ArrayList<Enemy> enemies, SpriteBatch batch){
+    public float attack(Enemy focus,ArrayList<Enemy> enemies, SpriteBatch batch){
 
         attack.update(focus.getX(),focus.getY());
         attack.draw(batch);
         if(attack.isAttack_end()) {
             for(Enemy enemy : enemies)
             {
-                //TODO SPECIAL WITH AOE
-                //TODO SPAWN HERE
+                if(aoe(focus.getX(),focus.getY(),enemy.getX(),enemy.getY()))
+                {
+                    enemy.getDMG(attack);
+                }
             }
+            return attack.getSpecial(SPAWN);
         }
-        return false;
+        return 0;
 
     }
-    private float tavolsag(float enemyx,float enemyy)
+    private boolean aoe(float focusx,float focusy,float enemyx,float enemyy)
     {
-        return (float)Math.sqrt(Math.pow(enemyx-x,2)+Math.pow(enemyy-y,2));
+        return  attack.getAoe() >= (float)Math.sqrt(Math.pow(enemyx-focusx,2)+Math.pow(enemyy-focusy,2));
     }
 
     @Override
