@@ -9,7 +9,6 @@ public class Tower extends VDat {
     protected ObjectTypes type;
     public Tower(ObjectTypes type)
     {
-        super(Type.TOWER);
         this.type = type;
     }
     @Override

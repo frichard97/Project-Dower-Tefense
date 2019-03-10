@@ -27,6 +27,7 @@ public class AttackTower extends Tower {
     private World world;
     private float timer;
     private int level = 1; //TODO MAX 5
+    public float range = 2f; //TODO RANGE TEST
     private float[][] bounds = new float[][]{
             { 32, 33 },
             { 33, -32 },
@@ -74,8 +75,11 @@ public class AttackTower extends Tower {
         }
 
     }
+    public boolean isCan_Attack()
+    {
+        return attack.isCan_Attack();
+    }
     public float attack(Enemy focus,ArrayList<Enemy> enemies, SpriteBatch batch){
-
         attack.update(focus.getX(),focus.getY());
         attack.draw(batch);
         if(attack.isAttack_end()) {

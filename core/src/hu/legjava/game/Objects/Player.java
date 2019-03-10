@@ -21,7 +21,6 @@ public class Player  extends VDat {
 
     public Player(World world, boolean local, OrthographicCamera cam)
     {
-        super(Type.PLAYER);
         /*******************ENGINE***************************/
         y= 20000;
         x = 20000;

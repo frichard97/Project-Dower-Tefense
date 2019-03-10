@@ -41,13 +41,12 @@ public class GameScreen implements Screen {
         controller.mapRenderer();
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
-        //grasstest.draw(batch);
-        //basetoweertest.draw(batch);
 
         for(VDat dat : controller.getSprites())
             {
             dat.draw(batch);
             }
+        controller.TowerAttack(batch);
         batch.end();
         controller.renderer(batch);
         }

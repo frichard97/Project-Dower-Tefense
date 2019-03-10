@@ -14,7 +14,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.Net.Net;
 import hu.legjava.game.Objects.AttackTower;
+import hu.legjava.game.Objects.Enemy;
 import hu.legjava.game.Objects.Player;
+import hu.legjava.game.Objects.Tower;
+import hu.legjava.game.Types.EnemyType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,7 @@ public class Controller {
     private TiledMap map;
     private TmxMapLoader maploader;
     private OrthogonalTiledMapRenderer maprenderer;
+    private  AttackListener attacker;
     public Controller(Net net)
     {
         this.net = net;
@@ -62,8 +66,10 @@ public class Controller {
         maploader = new TmxMapLoader();
         map = maploader.load("base.tmx");
         maprenderer = new OrthogonalTiledMapRenderer(map,1/PPM);
+        attacker = new AttackListener();
         //TODO TOWER TEST
         dat.add(new AttackTower(world,true));
+        dat.add(new Enemy(2, EnemyType.FAST,true));
 
         //TODO Felhasználó HUD inicializálás
     }
@@ -71,6 +77,7 @@ public class Controller {
     public List<VDat> getSprites(){return dat;}
     public void update(float delta) {
         world.step(delta,6,2);
+        attacker.setLists(getEnemy(),getTowers());
         for (VDat dat : dat) {
             if (Main.state == SINGLEPLAYER) {
                 dat.update(delta);
@@ -81,6 +88,34 @@ public class Controller {
             }
             cam.update();
         }
+    }
+    public void TowerAttack(SpriteBatch batch)
+    {
+        attacker.TowerAttack(batch);
+    }
+    public ArrayList<Enemy> getEnemy()
+    {
+        ArrayList<Enemy> list = new ArrayList<Enemy>();
+        for(VDat dat : dat)
+        {
+            if(dat instanceof Enemy)
+            {
+                list.add((Enemy)dat);
+            }
+        }
+        return list;
+    }
+    public ArrayList<Tower> getTowers()
+    {
+        ArrayList<Tower> list = new ArrayList<Tower>();
+        for(VDat dat: dat)
+        {
+            if(dat instanceof Tower)
+            {
+                list.add((Tower)dat);
+            }
+        }
+        return list;
     }
         public void renderer(SpriteBatch batch)
         {

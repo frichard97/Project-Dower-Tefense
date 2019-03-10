@@ -8,11 +8,6 @@ import static hu.legjava.game.Types.Special.SpecialTypes.IGNITE;
 import static hu.legjava.game.Types.Special.SpecialTypes.SLOW;
 
 public abstract class VDat {
-    protected enum Type{
-        ENEMY,
-        TOWER,
-        PLAYER
-    }
     protected float x;
     protected float y;
     protected int id;
@@ -21,7 +16,6 @@ public abstract class VDat {
     protected boolean local;
     protected  float armor;
     protected  abstract void update(float s);
-    private  Type type;
     protected Events pull(){
         Events.Datas  a = new Events.Datas();
         a.hp = hp;
@@ -31,11 +25,14 @@ public abstract class VDat {
         a.local = false;
         return a;
     }
-    public VDat(Type type)
-    {
-        this.type = type;
-    }
     protected abstract void draw(SpriteBatch batch);
     protected abstract Events event();
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
 }
