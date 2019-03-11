@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import hu.legjava.game.Main;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.VDat;
 
@@ -36,7 +37,7 @@ public class Player  extends VDat {
         fdef.shape = shape;
         body.createFixture(fdef);
         /**********************GRAFIKA*************************/
-        text = new Sprite(new Texture("magus2.png"));
+        text = new Sprite((Texture) Main.manager.get("magus2.png"));
         text.setBounds(x,y,text.getWidth()/PPM,text.getHeight()/PPM);
         text.setOriginCenter();
     }

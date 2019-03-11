@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import hu.legjava.game.Main;
 import hu.legjava.game.Types.*;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.VDat;
@@ -42,12 +43,12 @@ public class AttackTower extends Tower {
         this.local = local;
         this.world = world;
         //TODO EZ MÉG CSAK GRAFIKA TEST
-        alap = new Sprite(new Texture("basetower.png"));
-        kristaly = new Sprite(new Texture("kristaly.png"));
+        alap = new Sprite((Texture) Main.manager.get("basetower.png"));
+        kristaly = new Sprite((Texture) Main.manager.get("kristaly.png"));
         alap.setBounds(20000/PPM,20000/PPM,alap.getWidth()/PPM,alap.getHeight()/PPM);
         kristaly.setBounds(20000/PPM,20000/PPM,kristaly.getWidth()/PPM,kristaly.getHeight()/PPM);
         kristaly.setOriginCenter();
-        levelkristaly = new Sprite(new Texture("levelkristaly.png"));
+        levelkristaly = new Sprite((Texture) Main.manager.get("levelkristaly.png"));
         levelkristaly.setBounds(0,0,levelkristaly.getWidth()/PPM,levelkristaly.getHeight()/PPM);
         attack = AttackFactory.getAttackType(AType.BASIC);
         attack.setBase(x,y);
