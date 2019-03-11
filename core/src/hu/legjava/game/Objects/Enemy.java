@@ -3,6 +3,7 @@ package hu.legjava.game.Objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import hu.legjava.game.Main;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.Types.Attack;
 import hu.legjava.game.Types.EnemyType;
@@ -26,7 +27,7 @@ public class Enemy extends VDat {
         this.y = y;
         this.speed = speed;
         this.prio = new Priority(type);
-        a = new Sprite(new Texture("magus2.png"));
+        a = new Sprite((Texture) Main.manager.get("magus2.png"));
         a.setBounds(x,y,a.getWidth()/PPM,a.getHeight()/PPM);
 
 
