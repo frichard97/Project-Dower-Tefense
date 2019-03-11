@@ -17,8 +17,13 @@ public class Tower extends VDat implements Updateable {
     {
         this.type = type;
         clicklistener = new Actor();
+        clicklistener.setBounds(x,y,1,1);
         upgrademenu = ObjectTypes.getMENU(type);
 
+    }
+    public Actor getClickListener()
+    {
+        return clicklistener;
     }
     @Override
     protected void update(float s) {
