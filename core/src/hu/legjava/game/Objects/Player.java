@@ -53,16 +53,16 @@ public class Player  extends VDat {
         Vector2 velocity = new Vector2();
         body.setLinearVelocity(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            velocity.x = -speed;
+            velocity.x += -speed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            velocity.x = speed;
+            velocity.x += speed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            velocity.y = speed;
+            velocity.y += speed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            velocity.y = -speed;
+            velocity.y += -speed;
         }
         body.setLinearVelocity(velocity);
         x = body.getPosition().x;

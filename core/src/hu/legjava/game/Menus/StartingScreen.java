@@ -1,6 +1,7 @@
 package hu.legjava.game.Menus;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
 import hu.legjava.game.Main;
 
 public class StartingScreen implements Screen {

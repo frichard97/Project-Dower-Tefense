@@ -16,6 +16,7 @@ public abstract class VDat {
     protected boolean local;
     protected  float armor;
     protected  abstract void update(float s);
+    protected boolean destroyable = false;
     protected Events pull(){
         Events.Datas  a = new Events.Datas();
         a.hp = hp;
@@ -34,5 +35,12 @@ public abstract class VDat {
 
     public float getY() {
         return y;
+    }
+    public void destroy(){
+        destroyable = true;
+    }
+    public void setDestroyable()
+    {
+        destroyable = true;
     }
 }

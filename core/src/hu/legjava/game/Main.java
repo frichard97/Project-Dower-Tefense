@@ -12,6 +12,8 @@ public class Main extends Game {
 	public static final float GAMEWIDTH = 1920;
 	public static final float GAMEHEIGHT = 1080;
 	static public AssetManager manager;
+	static public final float ENEMY_POWER = 10;
+	static public final float TOWER_POWER = 10;
 	public enum STATES{
 		SINGLEPLAYER,
 		SERVER,

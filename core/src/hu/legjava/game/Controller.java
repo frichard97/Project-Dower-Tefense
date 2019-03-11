@@ -68,8 +68,8 @@ public class Controller {
         maprenderer = new OrthogonalTiledMapRenderer(map,1/PPM);
         attacker = new AttackListener();
         //TODO TOWER TEST
-        dat.add(new AttackTower(world,true));
-        dat.add(new Enemy(2, EnemyType.FAST,true));
+        dat.add(new AttackTower(world,true,200,200));
+        dat.add(new Enemy(2, EnemyType.FAST,true,199.4f,199.4f));
 
         //TODO Felhasználó HUD inicializálás
     }

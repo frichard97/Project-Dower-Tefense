@@ -19,11 +19,11 @@ public class Enemy extends VDat {
     private float speed;
     private Priority prio;
     private Sprite a ;
-    public Enemy(float speed, EnemyType type,boolean local)
+    public Enemy(float speed, EnemyType type,boolean local,float x,float y)
     {
         this.local = local;
-        x= 199.4f;
-        y = 199.4f;
+        this.x = x;
+        this.y = y;
         this.speed = speed;
         this.prio = new Priority(type);
         a = new Sprite(new Texture("magus2.png"));

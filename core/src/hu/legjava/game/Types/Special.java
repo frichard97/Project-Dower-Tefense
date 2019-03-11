@@ -9,6 +9,7 @@ public class Special {
         IGNITE,
         HEAL,
         SPAWN,
+        AOE
     }
     Map<SpecialTypes,Float> specials;
     public Special()

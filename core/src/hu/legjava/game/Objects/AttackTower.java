@@ -4,11 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
-import hu.legjava.game.Types.AType;
-import hu.legjava.game.Types.Attack;
-import hu.legjava.game.Types.AttackFactory;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import hu.legjava.game.Types.*;
 import hu.legjava.game.Net.Events;
-import hu.legjava.game.Types.ObjectTypes;
 import hu.legjava.game.VDat;
 
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ public class AttackTower extends Tower {
     private World world;
     private float timer;
     private int level = 1; //TODO MAX 5
-    public float range = 2f; //TODO RANGE TEST
+    public float range = 1.3f; //TODO RANGE TEST
     private float[][] bounds = new float[][]{
             { 32, 33 },
             { 33, -32 },
@@ -36,11 +34,11 @@ public class AttackTower extends Tower {
     };
      /*************************Végleges*************************/
      private Attack attack;
-    public AttackTower(World world, boolean local)
+    public AttackTower(World world, boolean local, float x,float y)
     {
         super(ObjectTypes.ATTACKTOWER);
-        x = 200;
-        y = 200;
+        this.x = x;
+        this.y = y;
         this.local = local;
         this.world = world;
         //TODO EZ MÉG CSAK GRAFIKA TEST

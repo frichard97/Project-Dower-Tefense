@@ -10,32 +10,71 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static hu.legjava.game.Main.PPM;
+import static hu.legjava.game.Main.TOWER_POWER;
 
 public  class Attack{
 
     protected Sprite sprite;
-    private float dmg = 0;
+    private float dmg_arany = 0;
     private boolean attack_end = false;
     private float x, y;
-    private float aoe;
     private Special special;
     private float basex;
     private float basey;
+    private float kristaly = 1;
+    private float arany;
+    private float dmg = 0;
+    private float hp_arany = 0;
+    private float armor_arany = 0;
 
     public boolean isCan_Attack() {
         return can_Attack;
     }
 
-    private boolean can_Attack = true;
-    public Attack(Sprite sprite, float aoe, float dmg,Special special) {
-        this.sprite = sprite;
-        this.dmg = dmg;
-        this.aoe = aoe;
-        this.special = special;
-        sprite.setBounds(x,y,sprite.getWidth()/PPM,sprite.getHeight()/PPM);
+    public void plusKristaly() {
+        this.kristaly++;
+        calculateStats();
 
     }
+    public void calculateStats()
+    {
+        dmg = 0;
+        arany = 0;
+        for(int i = 0; i < kristaly; i++)
+        {
+            arany += TOWER_POWER*Math.pow(0.95,i)*2;
+        }
+        dmg = arany*(dmg_arany/100);
 
+        System.out.println(arany);
+    }
+    public void minusKristaly()
+    {
+        if(kristaly > 1) {
+            this.kristaly--;
+            calculateStats();
+        }
+    }
+
+    private boolean can_Attack = true;
+    public Attack(Sprite sprite,float dmg_arany,float armor_arany,float hp_arany,Special special) {
+        this.sprite = sprite;
+        this.dmg_arany = dmg_arany;
+        this.special = special;
+        this.armor_arany = armor_arany;
+        this.hp_arany = hp_arany;
+        sprite.setBounds(x,y,sprite.getWidth()/PPM,sprite.getHeight()/PPM);
+        calculateStats();
+
+    }
+    public float getArmor()
+    {
+         return arany*(armor_arany/100);
+    }
+    public float getHp()
+    {
+        return arany*(hp_arany/100);
+    }
     public boolean isAttack_end() {
         return attack_end;
     }
@@ -53,7 +92,7 @@ public  class Attack{
     }
 
     public float getAoe() {
-        return aoe;
+        return special.getSpecial(Special.SpecialTypes.AOE);
     }
     public float getDmg()
     {
