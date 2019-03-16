@@ -19,7 +19,7 @@ public class Player  extends VDat {
     private Body body;
     private float speed = 1.1f;
     private Sprite text;
-
+    private static boolean MOVE= true;
     public Player(World world, boolean local, OrthographicCamera cam)
     {
         /*******************ENGINE***************************/
@@ -43,7 +43,8 @@ public class Player  extends VDat {
     }
     @Override
     protected void update(float s) {
-        if(local)
+        body.setLinearVelocity(0, 0);
+        if(local && MOVE)
         {
             input();
         }
@@ -52,7 +53,7 @@ public class Player  extends VDat {
     {
         Vector2 pos = body.getPosition();
         Vector2 velocity = new Vector2();
-        body.setLinearVelocity(0, 0);
+
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             velocity.x += -speed;
         }
@@ -87,6 +88,10 @@ public class Player  extends VDat {
         text.setRotation((float)angle);
         cam.position.x =x;
         cam.position.y = y;
+    }
+    public static void setMove(boolean value)
+    {
+        MOVE = value;
     }
 
     @Override

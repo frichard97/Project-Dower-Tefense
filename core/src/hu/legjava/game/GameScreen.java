@@ -39,13 +39,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         controller.update(delta);
         controller.mapRenderer();
+
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
-
         for(VDat dat : controller.getSprites())
-            {
+        {
             dat.draw(batch);
-            }
+        }
         controller.TowerAttack(batch);
         batch.end();
         controller.renderer(batch);

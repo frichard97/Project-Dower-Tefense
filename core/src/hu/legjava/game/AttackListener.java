@@ -29,7 +29,7 @@ public class AttackListener {
                 for(Enemy e : enemy)
                 {
                     float tavolsag = tavolsagprio(e,(AttackTower)first);
-                    if(tavolsag < ((AttackTower) first).range)
+                    if(tavolsag < ((AttackTower) first).getRange())
                     {
                         if(min > tavolsag)
                         {

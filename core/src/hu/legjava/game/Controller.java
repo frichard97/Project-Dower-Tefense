@@ -1,6 +1,8 @@
 package hu.legjava.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.legjava.game.Net.Events;
@@ -41,6 +44,11 @@ public class Controller {
     private TmxMapLoader maploader;
     private OrthogonalTiledMapRenderer maprenderer;
     private  AttackListener attacker;
+    public Stage clicklistener;
+    public Stage upgradestage;
+    public InputMultiplexer multiinput;
+    private Resources resources;
+    private static UpgradeMenu upgrademenu;
     public Controller(Net net)
     {
         this.net = net;
@@ -60,6 +68,7 @@ public class Controller {
         world = new World(new Vector2(0,0),false);
         b2dr = new Box2DDebugRenderer();
         //TODO FELHASZNÁLÓ
+        multiinput = new InputMultiplexer();
         Player player = new Player(world,true,cam);
         dat.add(player);
         //TODO MAP
@@ -67,10 +76,22 @@ public class Controller {
         map = maploader.load("base.tmx");
         maprenderer = new OrthogonalTiledMapRenderer(map,1/PPM);
         attacker = new AttackListener();
+        //TODO RESOURCES UPGRADE
+        resources = new Resources();
+        upgrademenu = new UpgradeMenu("Upgrade", Main.getSkin(),resources);
         //TODO TOWER TEST
-        dat.add(new AttackTower(world,true,200,200));
+        upgradestage = new Stage();
+        upgradestage.addActor(upgrademenu);
+        clicklistener = new Stage(gameport);
+        clicklistener.setDebugAll(true);
+        clicklistener.getDebugColor().add(Color.RED);
+        AttackTower tower = new AttackTower(world,true,200,200);
+        dat.add(tower);
+        clicklistener.addActor(tower.getClickListener());
+        multiinput.addProcessor(clicklistener);
+        multiinput.addProcessor(upgradestage);
         dat.add(new Enemy(2, EnemyType.FAST,true,199.4f,199.4f));
-
+        Gdx.input.setInputProcessor(multiinput);
         //TODO Felhasználó HUD inicializálás
     }
     public void Send(Events event){net.Send(event);}
@@ -119,11 +140,22 @@ public class Controller {
     }
         public void renderer(SpriteBatch batch)
         {
+            clicklistener.draw();
+            upgradestage.draw();
             b2dr.render(world,cam.combined);
         }
         public void mapRenderer()
         {
             maprenderer.setView(cam);
             maprenderer.render();
+        }
+        public static void showUpgradeMenu(Tower tower)
+        {
+            upgrademenu.setTower(tower);
+            upgrademenu.setVisible(true);
+        }
+        public static boolean upgradeIsOn()
+        {
+            return upgrademenu.isVisible();
         }
 }

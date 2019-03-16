@@ -24,9 +24,18 @@ public class StartingScreen implements Screen {
         Main.manager.load("kristaly.png", Texture.class);
         Main.manager.load("basetower.png", Texture.class);
         Main.manager.load("levelkristaly.png", Texture.class);
+        Main.manager.load("viz30.png",Texture.class);
+        Main.manager.load("tuz30.png",Texture.class);
+        Main.manager.load("magma30.png",Texture.class);
+        Main.manager.load("life30.png",Texture.class);
+        Main.manager.load("futotuz30.png",Texture.class);
+        Main.manager.load("goz30.png",Texture.class);
+        Main.manager.load("jeg30.png",Texture.class);
+        Main.manager.load("villam30.png",Texture.class);
+
 
         batch = new SpriteBatch();
-        betoltokep = new Texture("betoltoscreen.png");
+        //betoltokep = new Texture("betoltoscreen.png");
     }
 
     @Override
@@ -34,12 +43,12 @@ public class StartingScreen implements Screen {
         sr = new ShapeRenderer();
 
         batch.begin();
-        batch.draw(betoltokep, 0, 0);
+        //batch.draw(betoltokep, 0, 0);
         batch.end();
 
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setColor(Color.GREEN);
-        sr.rect(Main.GAMEWIDTH/2-400, Main.GAMEHEIGHT/7,(400*Main.manager.getProgress()),20);
+        sr.rect(Main.GAMEWIDTH/2-200, Main.GAMEHEIGHT/7,(400*Main.manager.getProgress()),20);
 
         sr.end();
         if(Main.manager.update())

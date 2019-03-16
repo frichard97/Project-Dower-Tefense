@@ -20,38 +20,39 @@ import static hu.legjava.game.Types.Special.SpecialTypes.SPAWN;
  * ***********************************/
 /***********************GRAFIKA****************************/
 public class AttackTower extends Tower {
+
+    /*************************Végleges*************************/
+    private Attack attack;
+    private final float attack_bounds = 0.15f;
+    private final float range = 1.3f;
     private Sprite alap;
     private Sprite kristaly;
     private Sprite levelkristaly;
     private World world;
     private float timer;
     private int level = 1; //TODO MAX 5
-    public float range = 1.3f; //TODO RANGE TEST
     private float[][] bounds = new float[][]{
             { 32, 33 },
             { 33, -32 },
             { -33,-32},
             {-32,33}
     };
-     /*************************Végleges*************************/
-     private Attack attack;
     public AttackTower(World world, boolean local, float x,float y)
     {
-        super(ObjectTypes.ATTACKTOWER);
-        this.x = x;
-        this.y = y;
+        super(ObjectTypes.ATTACKTOWER,x,y);
         this.local = local;
         this.world = world;
-        //TODO EZ MÉG CSAK GRAFIKA TEST
+        /********************GRAFIKA******************/
         alap = new Sprite((Texture) Main.manager.get("basetower.png"));
         kristaly = new Sprite((Texture) Main.manager.get("kristaly.png"));
-        alap.setBounds(20000/PPM,20000/PPM,alap.getWidth()/PPM,alap.getHeight()/PPM);
-        kristaly.setBounds(20000/PPM,20000/PPM,kristaly.getWidth()/PPM,kristaly.getHeight()/PPM);
+        alap.setBounds(x,y,alap.getWidth()/PPM,alap.getHeight()/PPM);
+        kristaly.setBounds(x,y,kristaly.getWidth()/PPM,kristaly.getHeight()/PPM);
         kristaly.setOriginCenter();
         levelkristaly = new Sprite((Texture) Main.manager.get("levelkristaly.png"));
         levelkristaly.setBounds(0,0,levelkristaly.getWidth()/PPM,levelkristaly.getHeight()/PPM);
-        attack = AttackFactory.getAttackType(AType.BASIC);
-        attack.setBase(x,y);
+        /*****************Incializálja a grafikát*****************/
+        attack = AttackFactory.getAttackType(AType.ICE);
+        attack.setBase(x+alap.getWidth()/2-attack_bounds,y+alap.getHeight()/2-attack_bounds);
     }
     @Override
     protected void update(float s) {
@@ -97,6 +98,10 @@ public class AttackTower extends Tower {
     private boolean aoe(float focusx,float focusy,float enemyx,float enemyy)
     {
         return  attack.getAoe() >= (float)Math.sqrt(Math.pow(enemyx-focusx,2)+Math.pow(enemyy-focusy,2));
+    }
+    public float getRange()
+    {
+        return range;
     }
 
     @Override
