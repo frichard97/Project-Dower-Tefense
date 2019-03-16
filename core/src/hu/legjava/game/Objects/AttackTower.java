@@ -24,13 +24,14 @@ public class AttackTower extends Tower {
     /*************************Végleges*************************/
     private Attack attack;
     private final float attack_bounds = 0.15f;
-    private final float range = 1.3f;
+    private final float range = 4f;
     private Sprite alap;
     private Sprite kristaly;
     private Sprite levelkristaly;
     private World world;
     private float timer;
     private int level = 1; //TODO MAX 5
+    private AttackFactory factory;
     private float[][] bounds = new float[][]{
             { 32, 33 },
             { 33, -32 },
@@ -51,7 +52,8 @@ public class AttackTower extends Tower {
         levelkristaly = new Sprite((Texture) Main.manager.get("levelkristaly.png"));
         levelkristaly.setBounds(0,0,levelkristaly.getWidth()/PPM,levelkristaly.getHeight()/PPM);
         /*****************Incializálja a grafikát*****************/
-        attack = AttackFactory.getAttackType(AType.ICE);
+        factory = new AttackFactory();
+        attack = factory.getAttackType(AType.ICE);
         attack.setBase(x+alap.getWidth()/2-attack_bounds,y+alap.getHeight()/2-attack_bounds);
     }
     @Override

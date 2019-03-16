@@ -1,6 +1,7 @@
 package hu.legjava.game.Types;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import hu.legjava.game.Objects.Enemy;
@@ -14,7 +15,7 @@ import static hu.legjava.game.Main.TOWER_POWER;
 
 public  class Attack{
 
-    protected Sprite sprite;
+    private Sprite sprite;
     private float dmg_arany = 0;
     private boolean attack_end = false;
     private float x, y;
@@ -57,8 +58,8 @@ public  class Attack{
     }
 
     private boolean can_Attack = true;
-    public Attack(Sprite sprite,float dmg_arany,float armor_arany,float hp_arany,Special special) {
-        this.sprite = sprite;
+    public Attack(Texture text, float dmg_arany, float armor_arany, float hp_arany, Special special) {
+        this.sprite = new Sprite(text);
         this.dmg_arany = dmg_arany;
         this.special = special;
         this.armor_arany = armor_arany;
@@ -91,6 +92,7 @@ public  class Attack{
         return special.getSpecial(type);
     }
 
+
     public float getAoe() {
         return special.getSpecial(Special.SpecialTypes.AOE);
     }
@@ -107,11 +109,12 @@ public  class Attack{
     }
     public void update(float ex,float ey) {
         attack_end = false;
-        double tavolsagx = ex - x;
-        double tavolsagy = ey - y;
-        double ossztavolsag = Math.sqrt(Math.pow(tavolsagx, 2) + Math.pow(tavolsagy, 2));
-        this.x += ossztavolsag / tavolsagx / PPM;
-        this.y += ossztavolsag / tavolsagy / PPM;
+        float tavolsagx = ex - x;
+        float tavolsagy = ey - y;
+        System.out.println("VECTOR"+ tavolsagx+" "+tavolsagy);
+        float ossztavolsag = (float)Math.sqrt((Math.pow(tavolsagx, 2) +Math.pow(tavolsagy, 2)));
+        this.x += (tavolsagx / ossztavolsag)*0.025;
+        this.y += (tavolsagy / ossztavolsag)*0.025;
         if (ossztavolsag < 0.1f) {
             attack_end = true;
             this.x = basex;

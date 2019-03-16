@@ -10,6 +10,7 @@ import hu.legjava.game.Types.EnemyType;
 import hu.legjava.game.Types.Priority;
 import hu.legjava.game.VDat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static hu.legjava.game.Main.PPM;
@@ -43,7 +44,7 @@ public class Enemy extends VDat {
     protected void draw(SpriteBatch batch) {
         a.draw(batch);
     }
-    public float attack(List<Tower> towers)
+    public float attack(ArrayList<Tower> towers)
     {
         //TODO ENEMY ATTACK
         return 0;
@@ -52,14 +53,6 @@ public class Enemy extends VDat {
     @Override
     protected Events event() {
         return null;
-    }
-    public float getX()
-    {
-        return x;
-    }
-    public float getY()
-    {
-        return y;
     }
     public void getDMG(Attack attack)
     {

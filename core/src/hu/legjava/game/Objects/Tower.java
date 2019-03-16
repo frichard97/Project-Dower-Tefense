@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import hu.legjava.game.Controller;
 import hu.legjava.game.Main;
@@ -14,6 +15,7 @@ import hu.legjava.game.VDat;
 
 public class Tower extends VDat {
     protected ObjectTypes type;
+    private static Stage listener = new Stage();
     private Actor clicklistener;
     public Tower(ObjectTypes type,float x,float y)
     {
@@ -33,8 +35,12 @@ public class Tower extends VDat {
                 }
             }
         });
-        System.out.println(x+" "+y);
+        listener.addActor(clicklistener);
 
+    }
+    public static Stage getTowerListener()
+    {
+        return listener;
     }
     public Actor getClickListener()
     {

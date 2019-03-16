@@ -29,7 +29,7 @@ import static hu.legjava.game.Main.*;
 import static hu.legjava.game.Main.STATES.*;
 
 public class Controller {
-    private List<VDat> dat = new ArrayList<VDat>();
+    private ArrayList<VDat> dat = new ArrayList<VDat>();
     private Net net;
 
     public OrthographicCamera getCam() {
@@ -44,11 +44,11 @@ public class Controller {
     private TmxMapLoader maploader;
     private OrthogonalTiledMapRenderer maprenderer;
     private  AttackListener attacker;
-    public Stage clicklistener;
     public Stage upgradestage;
     public InputMultiplexer multiinput;
     private Resources resources;
     private static UpgradeMenu upgrademenu;
+    private Builder build;
     public Controller(Net net)
     {
         this.net = net;
@@ -82,17 +82,13 @@ public class Controller {
         //TODO TOWER TEST
         upgradestage = new Stage();
         upgradestage.addActor(upgrademenu);
-        clicklistener = new Stage(gameport);
-        clicklistener.setDebugAll(true);
-        clicklistener.getDebugColor().add(Color.RED);
-        AttackTower tower = new AttackTower(world,true,200,200);
-        dat.add(tower);
-        clicklistener.addActor(tower.getClickListener());
-        multiinput.addProcessor(clicklistener);
         multiinput.addProcessor(upgradestage);
-        dat.add(new Enemy(2, EnemyType.FAST,true,199.4f,199.4f));
+        multiinput.addProcessor(Tower.getTowerListener());
         Gdx.input.setInputProcessor(multiinput);
         //TODO Felhasználó HUD inicializálás
+        //TODO BUILDER
+        build = new Builder(player,resources,dat,world);
+        build.initInputListener(multiinput);
     }
     public void Send(Events event){net.Send(event);}
     public List<VDat> getSprites(){return dat;}
@@ -140,7 +136,7 @@ public class Controller {
     }
         public void renderer(SpriteBatch batch)
         {
-            clicklistener.draw();
+            Tower.getTowerListener().draw();
             upgradestage.draw();
             b2dr.render(world,cam.combined);
         }
