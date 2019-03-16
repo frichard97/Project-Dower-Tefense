@@ -149,6 +149,22 @@ public class Controller {
             maprenderer.setView(cam);
             maprenderer.render();
         }
+        public void destroy()
+        {
+            //TODO NETWORKING
+            ArrayList<VDat> destroy = new ArrayList<VDat>();
+            for(VDat dat : dat)
+            {
+                if(dat.destroyable)
+                {
+                    destroy.add(dat);
+                }
+            }
+            for(VDat destr: destroy)
+            {
+                dat.remove(destr);
+            }
+        }
         public static void showUpgradeMenu(Tower tower)
         {
             upgrademenu.setTower(tower);

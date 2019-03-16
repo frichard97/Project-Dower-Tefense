@@ -22,6 +22,8 @@ public class Enemy extends VDat {
     private Sprite a ;
     public Enemy(float speed, EnemyType type,boolean local,float x,float y)
     {
+        //TODO TEST HP
+        this.hp = 60;
         this.local = local;
         this.x = x;
         this.y = y;
@@ -65,6 +67,10 @@ public class Enemy extends VDat {
         this.hp -= attack.getDmg();
         this.speed -= attack.getSpecial(SLOW);
         this.armor -= attack.getSpecial(IGNITE);
+        if(this.hp <= 0)
+        {
+            destroy();
+        }
         System.out.println("TESTENEMY: "+this.hp);
 
     }

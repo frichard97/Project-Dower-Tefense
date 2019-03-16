@@ -39,8 +39,4 @@ public abstract class VDat {
     public void destroy(){
         destroyable = true;
     }
-    public void setDestroyable()
-    {
-        destroyable = true;
-    }
 }

@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
         controller.TowerAttack(batch);
         batch.end();
         controller.renderer(batch);
+        controller.destroy();
         }
 
     @Override
