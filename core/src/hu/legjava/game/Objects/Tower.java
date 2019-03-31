@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.legjava.game.Controller;
 import hu.legjava.game.Main;
 import hu.legjava.game.Net.Events;
@@ -15,7 +16,7 @@ import hu.legjava.game.VDat;
 
 public class Tower extends VDat {
     protected ObjectTypes type;
-    private static Stage listener = new Stage();
+    private static Stage listener;
     private Actor clicklistener;
     public Tower(ObjectTypes type,float x,float y)
     {
@@ -23,7 +24,13 @@ public class Tower extends VDat {
         this.y = y;
         this.type = type;
         clicklistener = new Actor();
-        clicklistener.setBounds(x,y,1,1);
+        int height = 1;
+        int width = 1;
+        if(type == ObjectTypes.BASE){
+            height = 2;
+            width = 2;
+        }
+        clicklistener.setBounds(x,y,width,height);
         clicklistener.addListener(new ClickListener(Input.Buttons.RIGHT){
 
             @Override
@@ -41,6 +48,10 @@ public class Tower extends VDat {
     public static Stage getTowerListener()
     {
         return listener;
+    }
+    public static void initTowerListener(Viewport view)
+    {
+        listener = new Stage(view);
     }
     public Actor getClickListener()
     {

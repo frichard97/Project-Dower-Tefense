@@ -34,6 +34,7 @@ public class Builder {
     public Builder(Player player, Resources resources, ArrayList<VDat> dat, World world)
     {
         this.dat = dat;
+        this.world = world;
         this.player = player;
         this.resources = resources;
         listener = new InputProcessor(){

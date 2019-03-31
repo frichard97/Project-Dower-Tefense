@@ -29,12 +29,12 @@ public class Player  extends VDat {
         this.local = local;
         this.cam = cam;
         BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
+        CircleShape shape = new CircleShape();
         FixtureDef fdef = new FixtureDef();
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.position.set(x/PPM,y/PPM);
         body = world.createBody(bdef);
-        shape.setAsBox(25/PPM,25/PPM);
+        shape.setRadius(15/PPM);
         fdef.shape = shape;
         body.createFixture(fdef);
         /**********************GRAFIKA*************************/

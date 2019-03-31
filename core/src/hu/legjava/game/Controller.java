@@ -16,10 +16,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.legjava.game.Net.Events;
 import hu.legjava.game.Net.Net;
-import hu.legjava.game.Objects.AttackTower;
-import hu.legjava.game.Objects.Enemy;
-import hu.legjava.game.Objects.Player;
-import hu.legjava.game.Objects.Tower;
+import hu.legjava.game.Objects.*;
 import hu.legjava.game.Types.EnemyType;
 
 import java.util.ArrayList;
@@ -65,6 +62,7 @@ public class Controller {
         gameport = new StretchViewport(GAMEWIDTH/PPM,GAMEHEIGHT/PPM,cam);
         cam.setToOrtho(false,GAMEWIDTH/PPM,GAMEHEIGHT/PPM);
         cam.zoom = 1f; //TODO NEM KELL MAJD IDE
+        Tower.initTowerListener(gameport);
         world = new World(new Vector2(0,0),false);
         b2dr = new Box2DDebugRenderer();
         //TODO FELHASZNÁLÓ
@@ -84,11 +82,15 @@ public class Controller {
         upgradestage.addActor(upgrademenu);
         multiinput.addProcessor(upgradestage);
         multiinput.addProcessor(Tower.getTowerListener());
+        Tower.getTowerListener().setDebugAll(true);
         Gdx.input.setInputProcessor(multiinput);
         //TODO Felhasználó HUD inicializálás
         //TODO BUILDER
         build = new Builder(player,resources,dat,world);
         build.initInputListener(multiinput);
+
+        dat.add(new BaseTower(world,200,200));
+
     }
     public void Send(Events event){net.Send(event);}
     public List<VDat> getSprites(){return dat;}

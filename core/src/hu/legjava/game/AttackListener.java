@@ -24,23 +24,22 @@ public class AttackListener {
         {
             if(first instanceof AttackTower)
             {
-                float min = 100f;
-                Enemy focus = null;
-                for(Enemy e : enemy)
-                {
-                    float tavolsag = tavolsagprio(e,(AttackTower)first);
-                    if(tavolsag < ((AttackTower) first).getRange())
-                    {
-                        if(min > tavolsag)
-                        {
-                            min = tavolsag;
-                            focus = e;
+                    if( ((AttackTower) first).isCan_Attack()&&((AttackTower) first).getFocus() == null) {
+                        float min = 100f;
+                        for (Enemy e : enemy) {
+                            float tavolsag = tavolsagprio(e, (AttackTower) first);
+                            if (tavolsag < ((AttackTower) first).getRange()) {
+                                if (min > tavolsag) {
+                                    min = tavolsag;
+                                    ((AttackTower) first).setFocus(e);
+                                }
+                            }
                         }
                     }
-                }
-                if(focus != null) {
+
+                if(((AttackTower) first).getFocus() != null) {
                     if(((AttackTower) first).isCan_Attack())
-                    ((AttackTower) first).attack(focus, enemy, batch);
+                    ((AttackTower) first).attack(enemy, batch);
                 }
 
             }

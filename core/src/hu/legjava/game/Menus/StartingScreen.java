@@ -32,6 +32,7 @@ public class StartingScreen implements Screen {
         Main.manager.load("goz30.png",Texture.class);
         Main.manager.load("jeg30.png",Texture.class);
         Main.manager.load("villam30.png",Texture.class);
+        Main.manager.load("base.png",Texture.class);
 
 
         batch = new SpriteBatch();

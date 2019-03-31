@@ -30,7 +30,7 @@ public class Enemy extends VDat {
         this.y = y;
         this.speed = speed;
         this.prio = new Priority(type);
-        a = new Sprite((Texture) Main.manager.get("magus2.png"));
+        a = new Sprite(new Texture("Tree.png"));
         a.setBounds(x,y,a.getWidth()/PPM,a.getHeight()/PPM);
 
 

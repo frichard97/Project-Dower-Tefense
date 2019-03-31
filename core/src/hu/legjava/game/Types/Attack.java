@@ -111,7 +111,6 @@ public  class Attack{
         attack_end = false;
         float tavolsagx = ex - x;
         float tavolsagy = ey - y;
-        System.out.println("VECTOR"+ tavolsagx+" "+tavolsagy);
         float ossztavolsag = (float)Math.sqrt((Math.pow(tavolsagx, 2) +Math.pow(tavolsagy, 2)));
         this.x += (tavolsagx / ossztavolsag)*0.025;
         this.y += (tavolsagy / ossztavolsag)*0.025;
